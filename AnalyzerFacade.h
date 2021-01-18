@@ -23,7 +23,7 @@ namespace task3 {
     private:
         std::vector<std::future<SourceFileStatistic*>> res;
         ThreadPool thread_pool;
-        FileAnalyzer<SourceFileStatistic> file_analyzer;
+        FileAnalyzer file_analyzer;
         FileCollector file_collector;
     };
 }

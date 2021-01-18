@@ -1,15 +1,13 @@
 #include "FileAnalyzer.h"
 
-template<typename T>
-T* FileAnalyzer<T>::operator()(const std::string& path_to_file_) {
+SourceFileStatistic* FileAnalyzer::operator()(const std::string& path_to_file_) {
     path_to_file = path_to_file_;
     analyze_code();
 
     return &source_file_statistic;
 }
 
-template<typename T>
-void FileAnalyzer<T>::analyze_code() {
+void FileAnalyzer::analyze_code() {
     fs.open(path_to_file, std::ios_base::in);
     if (!fs) {
         //TODO: throw exception
@@ -33,8 +31,7 @@ void FileAnalyzer<T>::analyze_code() {
     fs.close();
 }
 
-template<typename T>
-void FileAnalyzer<T>::count_multiline_comments(std::string& line) {
+void FileAnalyzer::count_multiline_comments(std::string& line) {
     while (!regex_search(line, multiline_comment_end_pat)) {
         source_file_statistic.commented_lines++;
         getline(fs, line);

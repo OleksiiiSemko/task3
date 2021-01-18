@@ -4,7 +4,8 @@
 #include "ThreadPool.h"
 
 namespace task3 {
-
+    template<typename T>
+    std::vector<T> wait_for_all(std::vector<std::future<T>>& vf);
 }
 
 #endif //TASK3_UTILS_H

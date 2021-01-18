@@ -10,6 +10,17 @@ namespace task3 {
         explicit Wrapper(F&& f) :
                 impl{std::make_unique<impl_type<F>>(std::move(f))}
         {}
+
+        Wrapper(Wrapper&& other):
+                impl(std::move(other.impl))
+        {}
+
+        Wrapper& operator=(Wrapper&& other)
+        {
+            impl=std::move(other.impl);
+            return *this;
+        }
+
         Wrapper() = default;
         void operator()();
     private:

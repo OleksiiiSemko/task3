@@ -9,14 +9,13 @@ struct SourceFileStatistic {
     int code_lines{0};
 };
 
-template<typename T>
 class FileAnalyzer {
 public:
     FileAnalyzer() = default;
     void analyze_code();
-    T* operator()(const std::string& path_to_file);
+    SourceFileStatistic* operator()(const std::string& path_to_file);
 
-    T source_file_statistic;
+    SourceFileStatistic source_file_statistic;
 private:
     void count_multiline_comments(std::string& line);
     std::string path_to_file;

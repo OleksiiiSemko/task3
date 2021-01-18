@@ -14,7 +14,7 @@ TEST (FileAnalyzer, TestAnalizing) {
     int code_lines{4};
     int blank_lines{3};
 
-    FileAnalyzer<SourceFileStatistic> file_analyzer;
+    FileAnalyzer file_analyzer;
     SourceFileStatistic *statistic = file_analyzer("/home/oleksii/Documents/SofServe/task3/test_files/test1.cpp");
 
     ASSERT_EQ(statistic->commented_lines, commented_lines);
