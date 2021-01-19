@@ -7,6 +7,7 @@ struct SourceFileStatistic {
     int blank_lines{0};
     int commented_lines{0};
     int code_lines{0};
+    std::string path_to_file;
 };
 
 class FileAnalyzer {

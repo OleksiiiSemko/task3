@@ -9,13 +9,17 @@
 #include "FileAnalyzer.h"
 #include "ThreadPool.h"
 #include "FileCollector.h"
+#include "JsonParser.h"
 
 namespace task3 {
 
     class AnalyzerFacade {
     public:
-        AnalyzerFacade(const std::string& path_to_folder, int thread_numbers) :
-                file_collector{path_to_folder}, thread_pool{thread_numbers}
+        AnalyzerFacade(const std::string& path_to_analyzed_folder, const std::string& path_to_save_folder,
+                       int thread_numbers) :
+                file_collector{path_to_analyzed_folder},
+                json_parser{path_to_save_folder},
+                thread_pool{thread_numbers}
         {};
 
         void operator()();
@@ -25,6 +29,7 @@ namespace task3 {
         ThreadPool thread_pool;
         FileAnalyzer file_analyzer;
         FileCollector file_collector;
+        JsonParser json_parser;
     };
 }
 

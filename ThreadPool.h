@@ -12,11 +12,17 @@
 namespace task3 {
     class ThreadPool {
     public:
-        ThreadPool(const int threads_number);
+        ThreadPool(int threads_number);
 
         template<typename FunctionType>
-        std::future<typename std::result_of<FunctionType()>::type>
-                async(FunctionType f);
+        std::future<typename std::result_of<FunctionType()>::type> async(FunctionType f) {
+            typedef typename std::result_of<FunctionType()>::type
+                    result_type;
+            std::packaged_task<result_type()> task{std::move(f)};
+            std::future<result_type> res{task.get_future()};
+            task_queue.push(std::move(task));
+            return res;
+        }
         ~ThreadPool();
     private:
         void worker_thread();

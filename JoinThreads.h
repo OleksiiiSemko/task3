@@ -10,7 +10,14 @@ namespace task3 {
         explicit JoinThreads(std::vector<std::thread>& threads_) :
                 threads{threads_}
         {};
-        ~JoinThreads();
+
+        ~JoinThreads() {
+            for (auto& thread:threads) {
+                if(thread.joinable()) {
+                    thread.join();
+                }
+            }
+        }
 
     private:
         std::vector<std::thread>& threads;

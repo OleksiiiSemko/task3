@@ -21,5 +21,6 @@ TEST (FileAnalyzer, TestAnalizing) {
     ASSERT_EQ(statistic->code_lines, code_lines);
     ASSERT_EQ(statistic->blank_lines, blank_lines);
 
-    task3::AnalyzerFacade("/home/oleksii/Documents/SofServe/task3/test_files/test1.cpp", 4)();
+    task3::AnalyzerFacade("/home/oleksii/Documents/SofServe/task3/test_files", "/home/oleksii/Documents/SofServe/task3/test.json", 4)();
+
 }

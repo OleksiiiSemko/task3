@@ -12,7 +12,7 @@ void FileAnalyzer::analyze_code() {
     if (!fs) {
         //TODO: throw exception
     }
-
+    source_file_statistic.path_to_file = path_to_file;
     for (std::string line; getline(fs, line);) {
         if (std::regex_search(line, one_line_comment_pat)) {
             source_file_statistic.commented_lines++;
