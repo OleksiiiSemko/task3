@@ -23,7 +23,10 @@ namespace task3 {
             task_queue.push(std::move(task));
             return res;
         }
-        ~ThreadPool();
+
+        ~ThreadPool() {
+            done = true;
+        }
     private:
         void worker_thread();
         std::atomic_bool done;

@@ -16,18 +16,17 @@ namespace task3 {
     class AnalyzerFacade {
     public:
         AnalyzerFacade(const std::string& path_to_analyzed_folder, const std::string& path_to_save_folder,
-                       int thread_numbers) :
+                       int thread_numbers_) :
                 file_collector{path_to_analyzed_folder},
                 json_parser{path_to_save_folder},
-                thread_pool{thread_numbers}
+                thread_numbers{thread_numbers_}
         {};
 
         void operator()();
 
     private:
         std::vector<std::future<SourceFileStatistic*>> res;
-        ThreadPool thread_pool;
-        FileAnalyzer file_analyzer;
+        int thread_numbers;
         FileCollector file_collector;
         JsonParser json_parser;
     };

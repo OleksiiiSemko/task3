@@ -21,7 +21,7 @@ private:
     void count_multiline_comments(std::string& line);
     std::string path_to_file;
     std::regex one_line_comment_pat {R"(^//)"};
-    std::regex multiline_comment_start_pat {R"((\s)?[/]{1}[*]+)"};
+    std::regex multiline_comment_start_pat {R"((\s)?^[/]{1}[*]+)"};
     std::regex multiline_comment_end_pat {R"([*/]$)"};
     std::regex blank_line {R"(^$|^(\s)*$)"};
     std::fstream fs;

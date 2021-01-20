@@ -29,7 +29,3 @@ void task3::ThreadPool::worker_thread() {
         }
     }
 }
-
-task3::ThreadPool::~ThreadPool() {
-    done = true;
-}

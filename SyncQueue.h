@@ -11,13 +11,13 @@ namespace task3 {
     class SyncQueue {
     public:
         SyncQueue() = default;
-        SyncQueue(const SyncQueue&);
-        std::shared_ptr<T> try_pop();
-        void wait_and_pop(T& value);
-        std::shared_ptr<T> wait_and_pop();
+        SyncQueue(const SyncQueue<T>& other) {
+            std::lock_guard<std::mutex> lck{other.mtx};
+            queue = other.queue;
+        }
 
         bool try_pop(T &value) {
-            std::lock_guard<std::mutex> lck{mtx};
+            std::unique_lock<std::mutex> lck{mtx};
             if (queue.empty()) {
                 return false;
             }
@@ -27,7 +27,7 @@ namespace task3 {
         }
 
         void push(T new_value) {
-            std::lock_guard<std::mutex> lck{mtx};
+            std::unique_lock<std::mutex> lck{mtx};
             queue.push(std::move(new_value));
             cond.notify_one();
         }

@@ -10,10 +10,10 @@ namespace task3 {
 
         template<typename F>
         Wrapper(F&& f) :
-                impl{new impl_type<F>(std::move(f))}
+                impl{std::make_unique<impl_type<F>>(impl_type<F>(std::move(f)))}
         {}
 
-        explicit Wrapper(Wrapper&& other):
+        Wrapper(Wrapper&& other):
                 impl(std::move(other.impl))
         {}
 
@@ -35,7 +35,7 @@ namespace task3 {
         template<typename F>
         struct impl_type : impl_base {
             F f;
-            impl_type(F&& f_) : f{std::move(f_)} {};
+            explicit impl_type(F&& f_) : f{std::move(f_)} {};
             void call() override {
                 f();
             };
